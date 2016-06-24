@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:liu="http://schemas.android.com/apk/res/mr.liu.remind"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <View
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:alpha="0.5"
+        android:background="#D9D9D9" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffffff"
+         >
+    <mr.liu.customviews.ItemStateView
+        android:id="@+id/tenminute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        liu:desc="@string/tenminute" />
+
+    <mr.liu.customviews.ItemStateView
+        android:id="@+id/halfhour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        liu:desc="@string/halfhour" />
+
+    <mr.liu.customviews.ItemStateView
+        android:id="@+id/onehour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        liu:desc="@string/onehour" />
+
+    <mr.liu.customviews.ItemStateView
+        android:id="@+id/twohour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        liu:desc="@string/twohour" />
+
+    <mr.liu.customviews.ItemStateView
+        android:id="@+id/sixhour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        liu:desc="@string/sixhour" />
+
+    <Button
+        android:id="@+id/weekrepeat"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/button_selecter"
+        android:text="@string/enter"
+        android:textSize="15sp" />
+  </LinearLayout>
+</LinearLayout>

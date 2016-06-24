@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#2B2A2F"
+    >
+
+    <TextView
+        android:id="@+id/remindtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textColor="#ffffff"
+        android:text="提醒时间"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/alarmtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/remindtime"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="#aaaaaa"
+        android:gravity="center_horizontal"
+        android:maxLines="3"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp" 
+        android:textColor="#ffffff"
+        android:text="与密度无关的象素，一种基于屏幕密度的抽象单位。在每英寸160点的显示器上，1dp =1px。但dp和px的比例会随着屏幕密度的变化而改变，不同设备有不同的显示效果"
+        />
+
+    <ImageView
+        android:id="@+id/remindimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/alarmtext"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="45dp"
+        android:src="@drawable/alarm" />
+
+</RelativeLayout>

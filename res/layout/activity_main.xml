@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    >
+
+    <TextView
+        android:id="@+id/current_weekday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/current_year_month"
+         android:gravity="center"
+         android:textSize="15sp"
+        android:textColor="#ffffff"
+        android:layout_centerHorizontal="true"
+        android:text="星期六" />
+
+    <TextView
+        android:id="@+id/current_year_month"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="59dp"
+        android:gravity="center"
+        android:text="2016-6-11"
+        android:textColor="#ffffff"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/current_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/current_weekday"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="10:27"
+        android:textColor="#ffffff"
+        android:textSize="50sp" />
+
+    <ImageView
+        android:id="@+id/add_remind"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/current_time"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:onClick="addRemind"
+        android:src="@drawable/add1" />
+
+    <mr.liu.customviews.ExpandView
+        android:id="@+id/expand_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/add_remind"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" >
+    </mr.liu.customviews.ExpandView>
+
+</RelativeLayout>

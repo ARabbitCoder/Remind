@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="lightbule">#71A2B9</color>
+    <color name="touming">@android:color/transparent</color>
+    <drawable name="transparent">@android:color/transparent</drawable>
+    <color name="bule">#1987EA</color>
+    <color name="white">#FFFFFF</color>
+</resources>

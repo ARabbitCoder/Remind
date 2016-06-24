@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<lint>
+    <issue id="NewApi">
+        <ignore path="src/mr/liu/service/AlarmService.java" />
+        <ignore path="src/mr/liu/utils/AlarmUtils.java" />
+    </issue>
+    <issue id="SimpleDateFormat" severity="ignore">
+        <ignore path="src/mr/liu/handler/MyHandler.java" />
+    </issue>
+</lint>
