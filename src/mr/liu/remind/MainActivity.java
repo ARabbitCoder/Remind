@@ -25,6 +25,7 @@ public class MainActivity extends Activity {
 	private Animation openAnim;
 	private Animation closeAnim;
 	private ExpandView expandview;
+	private ImageView manager;
 	private boolean isclick = false;
 	private boolean startMonthActivity = false;
 	private boolean startWeekActivity = false;
@@ -36,6 +37,7 @@ public class MainActivity extends Activity {
 		week = (TextView) findViewById(R.id.current_weekday);
 		curtime = (TextView) findViewById(R.id.current_time);
 		add = (ImageView) findViewById(R.id.add_remind);
+		manager = (ImageView) findViewById(R.id.serach);
 		expandview = (ExpandView) findViewById(R.id.expand_view);
 		initAnim();
 		setExpandListenser();
@@ -115,6 +117,10 @@ public class MainActivity extends Activity {
 		}else{
 			expandAnim();
 		}
+	}
+	public void remindManager(View view) {
+		Intent intent  = new Intent(MainActivity.this,ManagerActivity.class);
+		startActivity(intent);
 	}
 	private void closedAnim() {
 		add.clearAnimation();

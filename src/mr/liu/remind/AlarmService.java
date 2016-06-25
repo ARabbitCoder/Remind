@@ -8,6 +8,7 @@ import mr.liu.beans.Remind;
 import mr.liu.dao.DBRemindHelper;
 import mr.liu.receiver.AlarmReceiver;
 import mr.liu.remind.AlarmActivity;
+import mr.liu.utils.AlarmUtils;
 import mr.liu.utils.TimeUtils;
 
 public class AlarmService extends IntentService {
@@ -16,7 +17,7 @@ public class AlarmService extends IntentService {
 	private static final int DayType = 2;
 	private AlarmManager mAlarmMgr;
 	private DBRemindHelper dbhelper;
-
+	private boolean flag;
 	public AlarmService(String name) {
 		super("AlarmService");
 	}
@@ -30,11 +31,15 @@ public class AlarmService extends IntentService {
 		// TODO Auto-generated method stub
 		int addid = intent.getIntExtra("remindid", -1);
 		int cancleid = intent.getIntExtra("cancleid", -1);
+		int repeatid = intent.getIntExtra("repeatid", -1);
 		if (addid >= 0) {
 			startRequestAlarm(addid);
 			return;
 		} else if (cancleid >= 0) {
 			cancelRequestAlarm(cancleid);
+			return;
+		}else if(repeatid>=0) {
+			startRepeatAlarm(repeatid);
 		}
 	}
 
@@ -44,35 +49,65 @@ public class AlarmService extends IntentService {
 		super.onCreate();
 		mAlarmMgr = (AlarmManager) getSystemService(ALARM_SERVICE);
 		dbhelper = new DBRemindHelper(this);
+		dbhelper = dbhelper.openDB();
+		flag = AlarmUtils.sdkVersion();
 		System.out.println("AlarmService is create");
 	}
-
+	private void startRepeatAlarm(int requestCode) {
+		cancelRequestAlarm(requestCode);
+		Remind re = dbhelper.getById(requestCode);
+		if(flag) {
+			mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+re.getRepeat(),
+					getOperationIntent(requestCode));
+		}else {
+			mAlarmMgr.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+re.getRepeat(),
+					getOperationIntent(requestCode));
+		}
+//		dbhelper.close();
+		System.out.println("repeat alarm service");
+	}
 	private void startRequestAlarm(int requestCode) {
 		cancelRequestAlarm(requestCode);
-		Remind re = dbhelper.openDB().getById(requestCode);
+		Remind re = dbhelper.getById(requestCode);
 		switch (re.getType()) {
 		case DateType:
 			long dvalue = TimeUtils.DateDValue(re.getDate());
 			if(dvalue>=0) {
-				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue,
-						getOperationIntent(requestCode));// 将过去setRepeating方法改为set方法
+				if(flag) {
+					mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue,
+							getOperationIntent(requestCode));
+				}else {
+					mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue,
+							getOperationIntent(requestCode));
+				}
 			}
 			break;
 		case WeekType:
 			String[] date = re.getDate().split(":");
 			long dvalue1 = TimeUtils.WeekDValue(Integer.parseInt(date[0].trim()),Integer.parseInt(date[1].trim()),Integer.parseInt(date[2].trim()));
-			mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue1,
-					getOperationIntent(requestCode));
+			if(flag) {
+				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue1,
+						getOperationIntent(requestCode));
+			}else {
+				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue1,
+						getOperationIntent(requestCode));
+			}
 			System.out.println("WeekType");
 			break;
 		case DayType:
 			String[] time = re.getDate().split(":");
 			long dvalue2 = TimeUtils.DayDValue(Integer.parseInt(time[0].trim()), Integer.parseInt(time[1].trim()));
-			mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue2,
-					getOperationIntent(requestCode));
+			System.out.println(dvalue2);
+			if(flag) {
+				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue2,
+						getOperationIntent(requestCode));
+			}else {
+				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue2,
+						getOperationIntent(requestCode));
+			}
 			break;
 		}
-		dbhelper.close();
+//		dbhelper.close();
 		System.out.println("alarmservice is start");
 	}
 

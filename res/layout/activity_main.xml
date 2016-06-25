@@ -58,5 +58,14 @@
         android:layout_centerHorizontal="true"
         android:visibility="invisible" >
     </mr.liu.customviews.ExpandView>
+    <ImageView
+        android:id="@+id/serach"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/expand_view"
+        android:layout_marginTop="10dp"
+        android:onClick="remindManager"
+        android:src="@drawable/search" /> 
 
 </RelativeLayout>

@@ -23,13 +23,12 @@
         android:layout_below="@+id/remindtime"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="40dp"
-        android:background="#aaaaaa"
         android:gravity="center_horizontal"
         android:maxLines="3"
         android:paddingLeft="30dp"
         android:paddingRight="30dp" 
+        android:textSize="25sp"
         android:textColor="#ffffff"
-        android:text="与密度无关的象素，一种基于屏幕密度的抽象单位。在每英寸160点的显示器上，1dp =1px。但dp和px的比例会随着屏幕密度的变化而改变，不同设备有不同的显示效果"
         />
 
     <ImageView
@@ -40,5 +39,25 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="45dp"
         android:src="@drawable/alarm" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/remindimage"
+        android:background="@drawable/alarm_button_selecter"
+        android:layout_marginTop="46dp"
+        android:text="稍后提醒" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/alarm_button_selecter"
+        android:text="标记完成" />
 
 </RelativeLayout>

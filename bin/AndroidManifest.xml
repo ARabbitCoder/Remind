@@ -39,6 +39,10 @@
             android:name="mr.liu.remind.WeekAndDayActivity"
             android:label="@string/title_activity_week_and_day" >
         </activity>
+        <activity
+            android:name="mr.liu.remind.ManagerActivity"
+            android:label="@string/title_activity_manager" >
+        </activity>
     </application>
 
 </manifest>

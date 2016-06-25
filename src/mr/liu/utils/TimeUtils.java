@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.content.res.Resources;
+import mr.liu.remind.R;
+
 public class TimeUtils {
 	public static final long offsetTime = 21600000;
 
@@ -79,8 +82,10 @@ public class TimeUtils {
 		}
 	}
 	public static long DayDValue(int hour,int minute) {
+		System.out.println(hour+":"+minute);
 		Calendar c = Calendar.getInstance();
 		Calendar c1 = Calendar.getInstance();
+//		System.out.println(c.get(Calendar.HOUR_OF_DAY));
 		c1.set(Calendar.HOUR_OF_DAY, hour);
 		c1.set(Calendar.MINUTE, minute);
 		c.set(Calendar.SECOND, 0);
@@ -112,5 +117,4 @@ public class TimeUtils {
 		}
 		return str;
 	}
-	
 }

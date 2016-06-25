@@ -132,7 +132,7 @@ public class DBRemindHelper {
 
 	public List<Remind> getAllRemind() {
 		List<Remind> list = new ArrayList<Remind>();
-		Cursor cursor = db.query(TableName, new String[] { KEY_id, KEY_type, KEY_date, KEY_desc,KEY_repeat}, null, null, null,
+		Cursor cursor = db.query(TableName, new String[] { KEY_id, KEY_type, KEY_date, KEY_desc,KEY_done,KEY_repeat}, null, null, null,
 				null, null);
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
@@ -146,11 +146,17 @@ public class DBRemindHelper {
 		}
 		return list;
 	}
-
+	public void setDone(Remind re) {
+		int id = getID(re);
+		if (id != -1) {
+			ContentValues content = new ContentValues();
+			content.put(KEY_done, 1);
+			db.update(TableName, content, "_id=?", new String[] { id + "" });
+		}
+	}
 	public void updateRemind(Remind oldre, Remind newre) {
 		int id = getID(oldre);
 		if (id != -1) {
-			db.delete(TableName, "_id=?", new String[] { id + "" });
 			ContentValues content = new ContentValues();
 			content.put(KEY_type, newre.getType());
 			content.put(KEY_date, newre.getDate());
