@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import mr.liu.beans.Remind;
 import mr.liu.dao.DBRemindHelper;
-import mr.liu.receiver.AlarmReceiver;
 import mr.liu.remind.AlarmActivity;
 import mr.liu.utils.AlarmUtils;
 import mr.liu.utils.TimeUtils;
@@ -18,6 +17,7 @@ public class AlarmService extends IntentService {
 	private AlarmManager mAlarmMgr;
 	private DBRemindHelper dbhelper;
 	private boolean flag;
+
 	public AlarmService(String name) {
 		super("AlarmService");
 	}
@@ -38,7 +38,7 @@ public class AlarmService extends IntentService {
 		} else if (cancleid >= 0) {
 			cancelRequestAlarm(cancleid);
 			return;
-		}else if(repeatid>=0) {
+		} else if (repeatid >= 0) {
 			startRepeatAlarm(repeatid);
 		}
 	}
@@ -53,44 +53,43 @@ public class AlarmService extends IntentService {
 		flag = AlarmUtils.sdkVersion();
 		System.out.println("AlarmService is create");
 	}
+
 	private void startRepeatAlarm(int requestCode) {
 		cancelRequestAlarm(requestCode);
 		Remind re = dbhelper.getById(requestCode);
-		if(flag) {
-			mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+re.getRepeat(),
+		if (flag) {
+			mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + re.getRepeat(),
 					getOperationIntent(requestCode));
-		}else {
-			mAlarmMgr.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis()+re.getRepeat(),
+		} else {
+			mAlarmMgr.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + re.getRepeat(),
 					getOperationIntent(requestCode));
 		}
-//		dbhelper.close();
+		// dbhelper.close();
 		System.out.println("repeat alarm service");
 	}
+
 	private void startRequestAlarm(int requestCode) {
 		cancelRequestAlarm(requestCode);
 		Remind re = dbhelper.getById(requestCode);
 		switch (re.getType()) {
 		case DateType:
 			long dvalue = TimeUtils.DateDValue(re.getDate());
-			if(dvalue>=0) {
-				if(flag) {
-					mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue,
-							getOperationIntent(requestCode));
-				}else {
-					mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue,
-							getOperationIntent(requestCode));
+			if (dvalue >= 0) {
+				if (flag) {
+					mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue, getOperationIntent(requestCode));
+				} else {
+					mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue, getOperationIntent(requestCode));
 				}
 			}
 			break;
 		case WeekType:
 			String[] date = re.getDate().split(":");
-			long dvalue1 = TimeUtils.WeekDValue(Integer.parseInt(date[0].trim()),Integer.parseInt(date[1].trim()),Integer.parseInt(date[2].trim()));
-			if(flag) {
-				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue1,
-						getOperationIntent(requestCode));
-			}else {
-				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue1,
-						getOperationIntent(requestCode));
+			long dvalue1 = TimeUtils.WeekDValue(Integer.parseInt(date[0].trim()), Integer.parseInt(date[1].trim()),
+					Integer.parseInt(date[2].trim()));
+			if (flag) {
+				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue1, getOperationIntent(requestCode));
+			} else {
+				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue1, getOperationIntent(requestCode));
 			}
 			System.out.println("WeekType");
 			break;
@@ -98,20 +97,19 @@ public class AlarmService extends IntentService {
 			String[] time = re.getDate().split(":");
 			long dvalue2 = TimeUtils.DayDValue(Integer.parseInt(time[0].trim()), Integer.parseInt(time[1].trim()));
 			System.out.println(dvalue2);
-			if(flag) {
-				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue2,
-						getOperationIntent(requestCode));
-			}else {
-				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue2,
-						getOperationIntent(requestCode));
+			if (flag) {
+				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue2, getOperationIntent(requestCode));
+			} else {
+				mAlarmMgr.set(AlarmManager.RTC_WAKEUP, dvalue2, getOperationIntent(requestCode));
 			}
 			break;
 		}
-//		dbhelper.close();
+		// dbhelper.close();
 		System.out.println("alarmservice is start");
 	}
 
 	private void cancelRequestAlarm(int requestCode) {
+		Remind re = dbhelper.getById(requestCode);
 		mAlarmMgr.cancel(getOperationIntent(requestCode));
 		System.out.println("RequsetAlarm is cancled");
 	}

@@ -117,4 +117,11 @@ public class TimeUtils {
 		}
 		return str;
 	}
+	public static boolean Before(String date) {
+		Date d1 = FormatString(date);
+		Calendar c = Calendar.getInstance();
+		Calendar c1 = Calendar.getInstance();
+		c.setTime(d1);
+		return c.before(c1);
+	}
 }

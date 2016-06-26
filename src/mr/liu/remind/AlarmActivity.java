@@ -38,7 +38,6 @@ public class AlarmActivity extends Activity {
 		alarm = (ImageView) findViewById(R.id.remindimage);
 		alarm.setAnimation(anim);
 		alarm.startAnimation(anim);
-		System.out.println(System.currentTimeMillis());
 		b1 = (Button) findViewById(R.id.button1);
 		b2 = (Button) findViewById(R.id.button2);
 		dbhelper = new DBRemindHelper(this);
@@ -70,31 +69,44 @@ public class AlarmActivity extends Activity {
 		});
 
 	}
+
 	private void LaterRemind() {
 		stopAlarm();
 		RepeatAlarmService();
 		finish();
 	}
+
 	private void CancleRemind() {
 		stopAlarm();
 		flag = true;
-		if(re!=null) {
+		if (re != null) {
+			if (re.getType() != 0) {
+				WeekAlarmService();
+			} else {
+				CancleAlarmService();
+			}
 			dbhelper.setDone(re);
-			CancleAlarmService();
 		}
 		finish();
 	}
+
+	private void WeekAlarmService() {
+		Intent intent = new Intent(this, AlarmService.class);
+		intent.putExtra("remindid", requestCode);
+		startService(intent);
+	}
+
 	private void CancleAlarmService() {
 		Intent intent = new Intent(this, AlarmService.class);
 		intent.putExtra("cancleid", requestCode);
 		startService(intent);
 	}
+
 	private void RepeatAlarmService() {
 		Intent intent = new Intent(this, AlarmService.class);
 		intent.putExtra("repeatid", requestCode);
 		startService(intent);
 	}
-
 
 	private void startAlarm() {
 		mPlayer = MediaPlayer.create(this, getSystemDefaultRing());

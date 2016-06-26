@@ -19,6 +19,15 @@ public class Remind implements Parcelable{
 		this.done = done;
 		this.repeat = repeat;
 	}
+	public Remind(int id,int type,String date,String desc,int done,long repeat) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.type = type;
+		this.date = date;
+		this.desc = desc;
+		this.done = done;
+		this.repeat = repeat;
+	}
 	public Integer getId() {
 		return id;
 	}

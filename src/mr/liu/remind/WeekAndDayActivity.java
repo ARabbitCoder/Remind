@@ -57,12 +57,92 @@ public class WeekAndDayActivity extends Activity {
 		crepeat = (TextView) findViewById(R.id.remind_repeat);
 		add = (Button) findViewById(R.id.insertRemind);
 		desc = (EditText) findViewById(R.id.reminddesc);
-		initListenser();
 		PickerUtils.zoomPicker(tpicker);
+		if (getIntent().getExtras() != null) {
+			Remind re = (Remind) getIntent().getExtras().get("remind");
+			UpdateView(re);
+			initListenser(false);
+		} else {
+			initListenser(true);
+		}
 	}
-
-	private void initListenser() {
-		select[0] = true;
+	private void UpdateView(Remind re) {
+		if(re.getType()==1) {
+			String[] s1 = re.getDate().split(":");
+			int a = Integer.parseInt(s1[0].trim());
+			int hour = Integer.parseInt(s1[1].trim());
+			int minute = Integer.parseInt(s1[2].trim());
+			tpicker.setCurrentHour(hour);
+			tpicker.setCurrentMinute(minute);
+			setWeek(a);
+		}else {
+			String[] s1 = re.getDate().split(":");
+			int hour = Integer.parseInt(s1[0].trim());
+			int minute = Integer.parseInt(s1[1].trim());
+			tpicker.setCurrentHour(hour);
+			tpicker.setCurrentMinute(minute);
+			setWeek(0);
+		}
+		desc.setText(re.getDesc());
+	}
+	private void setRepeat(long repeat1) {
+		if (repeat1 == tenrepeat) {
+			crepeat.setText(R.string.tenminute);
+			currentrepeat = tenrepeat;
+		} else if (repeat1 == halfrepeat) {
+			crepeat.setText(R.string.halfhour);
+			currentrepeat = tenrepeat;
+		} else if (repeat1 == onerepeat) {
+			crepeat.setText(R.string.onehour);
+			currentrepeat = tenrepeat;
+		} else if (repeat1 == tworepeat) {
+			crepeat.setText(R.string.twohour);
+			currentrepeat = tenrepeat;
+		} else if (repeat1 == sixrepeat) {
+			crepeat.setText(R.string.sixhour);
+			currentrepeat = tenrepeat;
+		}
+	}
+	private void setWeek(int a) {
+		switch (a) {
+		case 0:
+			ctype.setText(R.string.everyday);
+			select[0] = true;
+			break;
+		case 1:
+			ctype.setText(R.string.sunday);
+			select[1] = true;
+			break;
+		case 2:
+			ctype.setText(R.string.monday);
+			select[2] = true;
+			break;
+		case 3:
+			ctype.setText(R.string.tuesday);
+			select[3] = true;
+			break;
+		case 4:
+			ctype.setText(R.string.wednsday);
+			select[4] = true;
+			break;
+		case 5:
+			ctype.setText(R.string.thursday);
+			select[5] = true;
+			break;
+		case 6:
+			ctype.setText(R.string.friday);
+			select[6] = true;
+			break;
+		case 7:
+			ctype.setText(R.string.saturday);
+			select[7] = true;
+			break;
+		}
+	}
+	private void initListenser(boolean b) {
+		if(b) {
+			select[0] = true;
+		}
 		String str = TimeUtils.formatHourNum(tpicker.getCurrentHour(), tpicker.getCurrentMinute());
 		ctime.setText(str);
 		week_select.setOnClickListener(new OnClickListener() {

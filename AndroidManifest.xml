@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -43,6 +44,11 @@
             android:name="mr.liu.remind.ManagerActivity"
             android:label="@string/title_activity_manager" >
         </activity>
+        <receiver android:name="mr.liu.receiver.AlarmReceiver">
+			<intent-filter >
+			    <action android:name="android.intent.action.BOOT_COMPLETED"/>
+			</intent-filter>
+        </receiver>
     </application>
 
 </manifest>

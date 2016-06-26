@@ -3,6 +3,8 @@ package mr.liu.beans.adapter;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -11,7 +13,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import mr.liu.beans.Remind;
 import mr.liu.dao.DBRemindHelper;
+import mr.liu.remind.AlarmService;
 import mr.liu.remind.R;
+import mr.liu.remind.RemindAddActivity;
+import mr.liu.remind.WeekAndDayActivity;
 
 public class RemindManager extends BaseAdapter{
 	private Context context;
@@ -70,6 +75,14 @@ public class RemindManager extends BaseAdapter{
 				Fresh(re, position);
 			}
 		});
+		holder.update.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				UpdateRemind(re);
+			}
+		});
 		return convertView;
 	}
 	class ViewHolder {
@@ -107,8 +120,29 @@ public class RemindManager extends BaseAdapter{
 		}
 	}
 	private void Fresh(Remind re,int position) {
+		CancleAlarmService(dbhelper.getID(re));
 		dbhelper.deleteRemind(re);
 		list.remove(position);
 		notifyDataSetChanged();
+	}
+	private void CancleAlarmService(int id) {
+			Intent intent = new Intent(context, AlarmService.class);
+			intent.putExtra("cancleid", id);
+			context.startService(intent);
+	}
+	private void UpdateRemind(Remind re) {
+		
+		Bundle bundle = new Bundle();
+		bundle.putParcelable("remind", re);
+		System.out.println(re.getType()==0);
+		if(re.getType()==0) {
+			Intent intent = new Intent(context,RemindAddActivity.class);
+			intent.putExtras(bundle);
+			context.startActivity(intent);
+		}else {
+			Intent intent = new Intent(context,WeekAndDayActivity.class);
+			intent.putExtras(bundle);
+			context.startActivity(intent);
+		}
 	}
 }

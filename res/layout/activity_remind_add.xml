@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/date_layout_parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -100,7 +101,7 @@
         android:background="#000000" />
 
     <LinearLayout
-        android:id="@+id/repeat_select"
+        android:id="@+id/date_repeat_select"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:maxHeight="50dp"
@@ -118,7 +119,7 @@
            android:textSize="15sp" />
 
         <TextView
-            android:id="@+id/remind_repeat"
+            android:id="@+id/date_remind_repeat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -172,6 +173,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
         android:background="@drawable/button_selecter"
         android:gravity="center"
         android:minWidth="120dp"

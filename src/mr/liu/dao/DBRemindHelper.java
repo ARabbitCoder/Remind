@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import mr.liu.beans.Remind;
+import mr.liu.utils.TimeUtils;
 
 public class DBRemindHelper {
 	private static final String TableName = "reminds";
@@ -136,12 +137,13 @@ public class DBRemindHelper {
 				null, null);
 		if (cursor != null) {
 			while (cursor.moveToNext()) {
+				int id = cursor.getInt(0);
 				int type = cursor.getInt(1);
 				String date = cursor.getString(2);
 				String desc = cursor.getString(3);
 				int done = cursor.getInt(4);
 				long repeat = cursor.getLong(5);
-				list.add(new Remind(type, date, desc, done,repeat));
+				list.add(new Remind(id,type, date, desc, done,repeat));
 			}
 		}
 		return list;
@@ -169,5 +171,21 @@ public class DBRemindHelper {
 		int id = getID(re);
 		System.out.println(id);
 		return id>=0?id:-1;
+	}
+	public List<Remind> getEffetive(){
+		List<Remind> list = getAllRemind();
+		List<Remind> result = new ArrayList<Remind>();
+		for(int i=0;i<list.size();i++) {
+			Remind re = list.get(i);
+			if(re.getType()==0) {
+				if(!TimeUtils.Before(re.getDate()) || re.getDone()==1) {
+					result.add(re);
+				}
+			}else {
+				result.add(re);
+			}
+		}
+		list = null;
+		return result;
 	}
 }
