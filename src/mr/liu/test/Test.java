@@ -10,6 +10,6 @@ public class Test extends TestCase {
 	public void test() {
 		System.out.println(System.currentTimeMillis());
 		System.out.println(TimeUtils.DayDValue(10,51));
-		System.out.println(TimeUtils.DayDValue(11,0));
+		System.out.println(TimeUtils.DayDValue(9,0));
 	}
 }

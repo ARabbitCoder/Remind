@@ -96,7 +96,6 @@ public class AlarmService extends IntentService {
 		case DayType:
 			String[] time = re.getDate().split(":");
 			long dvalue2 = TimeUtils.DayDValue(Integer.parseInt(time[0].trim()), Integer.parseInt(time[1].trim()));
-			System.out.println(dvalue2);
 			if (flag) {
 				mAlarmMgr.setExact(AlarmManager.RTC_WAKEUP, dvalue2, getOperationIntent(requestCode));
 			} else {

@@ -28,8 +28,8 @@
     <string name="remindtype">提醒类型：</string>
     <string name="currentdate">当前选择日期：</string>
     <string name="currenttime">当前选择时间：</string>
-    <string name="selecttime">请选择时间：</string>
-    <string name="selectdate">请选择日期：</string>
+    <string name="selecttime">选择时间</string>
+    <string name="selectdate">选择日期</string>
     <string name="enter">确定</string>
     <string name="tenminute">10分钟</string>
     <string name="halfhour">半小时</string>
@@ -46,5 +46,6 @@
     <string name="sunday">周日</string>
     <string name="title_activity_manager">ManagerActivity</string>
     <string name="empty_remind">这里是空的!=_=||</string>
+    <string name="select_date">选择日期</string>
 
 </resources>

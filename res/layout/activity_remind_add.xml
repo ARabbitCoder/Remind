@@ -58,8 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:text="选择日期"
-           android:textSize="15sp" />
+            android:layout_marginTop="5dp"
+            android:text="@string/select_date"
+           android:textSize="18sp" />
     </RelativeLayout>
 
     <View

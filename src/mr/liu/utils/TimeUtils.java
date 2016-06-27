@@ -85,12 +85,12 @@ public class TimeUtils {
 		System.out.println(hour+":"+minute);
 		Calendar c = Calendar.getInstance();
 		Calendar c1 = Calendar.getInstance();
-//		System.out.println(c.get(Calendar.HOUR_OF_DAY));
 		c1.set(Calendar.HOUR_OF_DAY, hour);
 		c1.set(Calendar.MINUTE, minute);
-		c.set(Calendar.SECOND, 0);
-		c.set(Calendar.MILLISECOND, 0);
+		c1.set(Calendar.SECOND, 0);
+		c1.set(Calendar.MILLISECOND, 0);
 		if(c1.after(c)) {
+			System.out.println("current is before"+c1.getTimeInMillis());
 			return c1.getTimeInMillis();
 		}else {
 			int cday = c.get(Calendar.DAY_OF_MONTH);
